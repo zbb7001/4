@@ -1,0 +1,103 @@
+0.完全禁用打开运行对话框的 Win+R 热键:  #r::return
+
+1.保存为 UTF-8 有签名
+
+2.PostMessage, 0x112, 0xF060,,, A           ;运行结束 关闭打开的窗口
+
+3.#Requires AutoHotkey v2.0+                  ;以何种版本运行
+#Requires AutoHotkey v1.1.36
+
+4.Menu, Tray, Icon, E:\3\IDM v6.38.7.2 中文绿色特别版\IDM\Bin\IDMan.exe,15           ; 托盘脚本图标 
+
+5.  Menu , tray , tip , !w                鼠标悬浮提示
+
+6.#NoEnv                             ; 主要是为了与以后兼容，也可以改善性能
+
+7.#SingleInstance Force      ;当此脚本已经运行时自动替换旧实例再次运行。 
+
+8. #WinActivateForce          ;用强制的方法激活窗口。
+
+9.#Persistent     ; 使非热键类的脚本持久运行（即直到用户关闭或遇到 ExitApp）
+
+10.SetBatchLines, -1         ; 脚本快速执行,减少 CPU 占用,  使用10ms -1
+
+11.FileGetTime ScriptStartModTime, %A_ScriptFullPath%
+
+12.SetTimer CheckScriptUpdate, 100, 0x7FFFFFFF ; 100 ms, highest priority最高优先级
+
+13.SetWorkingDir, %A_ScriptDir%                                      ; 让脚本无条件使用它所在的文件夹作为工作目录  
+
+
+#Include *i %A_ScriptDir%\BeautifulToolTip\Lib\NonNull.ahk
+
+#include %A_scriptDir%\myahk\winhide.ahk
+
+#Include, Lib\Gdip_All.ahk
+
+D:\ahk1.0\Lib\Gdip_All.ahk    
+D:\ahk1.0\ *.ahk        可用下面直接调用Lib中的库文件
+#Include <Gdip_All>
+
+14    run D:\ahk1.0\cloudflare\自动设置.bat ,,hide 
+
+15    Run D:\ahk1.0\Mouse over the file (do not need click) to preview the contents.ahk /Auto
+
+16   ; Tray menu
+Menu, Tray, NoStandard ; remove all options
+
+Menu, Tray, Add, About, ClickHandler
+Menu, Tray, Default, About 
+
+Menu, Tray, Add, Exit, ExitScript ; add exit option
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$F5::
+	KeyWait, F5
+	If (A_TimeSinceThisHotkey > 900)
+		SetTimer, mainp1, -1                                                                 ;修改mainp1234
+	;Else
+		;SendInput, % GetKeyState("CapsLock", "T") ? "T" : "t"             ;时间不够1秒输入1 修改3个1
+Return
+
+mainp1:                                                                                                                 ;修改mainp1234
+	run, D:\ahk1.0\北京时间校准器\北京时间校准器.ahk /Auto
+loop,1
+    SoundBeep, 1000, 10
+Text= ?       启   动        ?`n  ——————`n?  校准北京时间   ?
+btt(Text,600,0,,"Style8") 
+sleep, 1000
+btt()?
+Return
+;------------------------------------------北京时间校准器    长按 1  1秒时间
+;???????????????????????????????????????????????????????   11
